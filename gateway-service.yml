@@ -1,3 +1,6 @@
+spring:
+  aop:
+    proxyTargetClass: true
 server:
   port: 8080
 zuul:
@@ -5,16 +8,46 @@ zuul:
   routes:
     user-service:
       path: /user-service/**
+      sensitiveHeaders:
       serviceId: user-service
     product-service:
       path: /product-service/**
+      sensitiveHeaders:
       serviceId: product-service
     cart-service:
       path: /cart-service/**
+      sensitiveHeaders:
       serviceId: cart-service
     order-service:
           path: /order-service/**
+          sensitiveHeaders:
           serviceId: order-service
+    security-service:
+      sensitiveHeaders:
+      path: /uaa/**
+      stripPrefix: false
+  add-proxy-headers: true
+  
+security:
+  # Disable Spring Boot basic authentication
+  basic:
+    enabled: false
+  oauth2:
+    sso:
+      loginPath: /login
+    client:
+      accessTokenUri: http://security-service/uaa/oauth/token
+      userAuthorizationUri: /uaa/oauth/authorize
+      clientId: acme
+      clientSecret: acmesecret
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApJV/gCE9TojJpUjpBEQxC8PlBtUxY5/VNlFUNrb7GK61d3BjjtI7wUHEKep8/DMvmq5/Ov4JsNzvlXUzKG/uTx4Xk2SR3H1uMlOEekoOBQsNwmkdB5i4pzKZB9Ks6h71jjkhfUi8ej47icKLPnY6sZix1lavN2OR6SkdTwnctYbkWbLDDQ7VYcHvje6NO/DaZh4vHHSqd6xxvH2NrFzjTH/o9psJI7TtYyWxj7gIDspQ9wiFv50y8jOw2BrULJQ9bLX7kkGRuAMe0AyKcWvsViJeP9I9FJBWH3MrxOzceT4/ByJpa5m1IP/SMq8YOKYyG1dkl2CPO55as974T+0NwwIDAQAB
+          -----END PUBLIC KEY-----
+      id: openid
+      serviceId: ${PREFIX:}resource
 
 eureka:
   client:
