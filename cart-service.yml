@@ -1,6 +1,5 @@
 server:
-  port: 8309
-
+  port: 8304
 eureka:
   client:
     registerWithEureka: true
