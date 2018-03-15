@@ -15,7 +15,6 @@ eureka:
       defaultZone: http://localhost:8300/eureka/
 
 zuul:
-  prefix: /api
   routes:
     dummy-service: /dummy/**
     security-service:
