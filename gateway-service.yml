@@ -2,7 +2,7 @@ spring:
   aop:
     proxyTargetClass: true
 server:
-  port: 8080
+  port: 8086
 zuul:
   routes:
     user-service:
@@ -17,13 +17,11 @@ zuul:
       path: /cart-service/**
       sensitiveHeaders:
       serviceId: cart-service
-    order-service:
-          path: /order-service/**
-          sensitiveHeaders:
-          serviceId: order-service
+    order-service: /order-service/**
     security-service:
       sensitiveHeaders:
       path: /uaa/**
+      serviceId: security-service
       stripPrefix: false
   add-proxy-headers: true
   
