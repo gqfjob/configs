@@ -22,6 +22,7 @@ zuul:
       path: /uaa/**
       stripPrefix: false
     order-service: /order-service/**
+    product-service: /product-service/**
   add-proxy-headers: true
 
 security:
