@@ -23,6 +23,7 @@ zuul:
       stripPrefix: false
     order-service: /order-service/**
     product-service: /product-service/**
+    client-service: /ui/**
   add-proxy-headers: true
 
 security:
