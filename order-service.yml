@@ -1,6 +1,8 @@
 server:
   port: 8303
-
+logging:
+  level:
+    ROOT: DEBUG
 eureka:
   client:
     registerWithEureka: true
