@@ -64,3 +64,11 @@ eureka:
   client:
     service-url:
       defaultZone: ${REGISTRY_URL}
+      
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
